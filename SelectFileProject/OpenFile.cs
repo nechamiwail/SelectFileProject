@@ -18,6 +18,7 @@ namespace SelectFileProject
         {
             try
             {
+                //check if foder exist - if exist reload all files in folder and sub folder and papulate filesComboBox
                 bool isFolderExist = Directory.Exists(filePathTextBox.Text);
                 if (isFolderExist)
                 {
@@ -51,6 +52,7 @@ namespace SelectFileProject
         }
         private List<FileInfo> GetFilesRecursive(ref List<FileInfo> filesInfo, string currentFolderPath)
         {
+            //loop for each folder - and its sub folders - take all files names and file path
             foreach (string fileName in Directory.GetFiles(currentFolderPath))
             {
                 filesInfo.Add(new FileInfo()
@@ -67,6 +69,7 @@ namespace SelectFileProject
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            //when click on upload file button open dialog to select folder
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.ShowDialog();
             filePathTextBox.Text = folderBrowserDialog.SelectedPath;
@@ -74,6 +77,7 @@ namespace SelectFileProject
 
         private void filesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //when choose file - open file using process
             FileInfo selectedFile = (FileInfo)filesComboBox.SelectedItem;
             if (File.Exists(selectedFile.FileFullPath))
             {
